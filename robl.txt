@@ -21,7 +21,7 @@ end
 
 
 --------------------------Получение игрока
-local Players = game:GetService("Players") получение инпрка
+local Players = game:GetService("Players") 
 
 local function onPlayerAdded(player)
 
@@ -41,9 +41,9 @@ end
 Players.PlayerAdded:Connect(onPlayerAdded)
 
 
-task.wait()улучшенная версия wait()
+task.wait() ---улучшенная версия wait()
 
-Part.BrickColor = BrickColor.new("Medium red") Смена цвета
+Part.BrickColor = BrickColor.new("Medium red") --Смена цвета
 
 if Part.BrickColor == BrickColor.new("Medium red") then else if 
 	print("ITs Mediom rape part")
@@ -94,7 +94,7 @@ until hotdog == 10
 
 local Part1= game.Workspace.ssa
 
-Part1.Touched:Connect(function()
+Part1.Touched:Connect(function() -- Проверка на касание
 	print("Touched")
 end)
 
@@ -109,7 +109,7 @@ local Part1= game.Workspace.ssa
 Part1.Touched:Connect(function(hit)
 	print("Touched")
 	print(hit)
-	if hit.Parent:FindFirstChild("Humanoid") then
+	if hit.Parent:FindFirstChild("Humanoid") then --- поиск игрока который наступил
 		local health = hit.Parent.Humanoid.Health
 		hit.Parent.Humanoid.Health = health - 1
 	end
@@ -118,7 +118,7 @@ end)
 Instance.new("Part" , game.Workspace)
 
 
-game.Players.PlayerAdded:Connect(function(player)
+game.Players.PlayerAdded:Connect(function(player) -- Папка со статистикой
 	local leaderstats = Instance.new("Folder", player)
 	leaderstats.Name = "leaderstats"
 	local Points = Instance.new("IntValue", leaderstats)
@@ -126,12 +126,12 @@ game.Players.PlayerAdded:Connect(function(player)
 	Points.Value = 100
 end)
 
-local MyFavoriteFood = {"pizza" , "Food" , "candle"}
+local MyFavoriteFood = {"pizza" , "Food" , "candle"} ---
 for key , foods in pairs(MyFavoriteFood) do
 	print(key ,"=", foods)
 end
 
-local Tool = script.Parent -- инструмент
+local Tool = script.Parent -- инструмент как работает
 
 Tool.Activated:Connect(function()
 	print("work")
@@ -191,7 +191,7 @@ UserInputService.InputEnded:Connect(function( input , event)
 end)
 
 
-UserInputService = game:GetService("UserInputService")
+UserInputService = game:GetService("UserInputService")-- нажатие кнопки
 local keyPress = false
 UserInputService.InputBegan:Connect(function(input , event)
 	if input.UserInputType == Enum.UserInputType.Keyboard then
@@ -228,7 +228,7 @@ local Info = TweenInfo.new(
 	5 , -- Длина
 	Enum.EasingStyle.Sine , -- стиль как расшираеться
 	Enum.EasingDirection.Out, -- какие части расширяться первыми
-	0 , --- Количество повторений
+	0 , --- Количество повторений -1 бесконечно
 	false , --- reverse если тру то он вырастет как нужно но потом вернеться в изначальное положение
 	0 --- Задержка
 )
