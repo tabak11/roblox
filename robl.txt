@@ -271,7 +271,7 @@ wait(3)
 part2.CFrame = workspace.Part1.CFrame
 
 
-
+local debounce = false -- Защита от повторного срабатывания
 
 
 
