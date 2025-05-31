@@ -1,0 +1,277 @@
+---- ------------------------------ПРИНТЫ
+local logMessage = "User has more than 10 items!" Функция
+local function printMessage()
+	print(logMessage)
+end
+printMessage() --> User has more than 10 items!
+
+-----------------------------Таблица
+local myArray = {"chips", "sparkling water", "salsa"} 
+local myDictionary = {
+	snack = "chips",
+	drink = "sparkling water",
+	dip = "salsa"
+}
+print(myArray[1]) --> chips
+print(myDictionary.dip) --> salsa
+
+for index, value in ipairs(myArray) do -- standard Lua ipairs
+	print(index, value)
+end
+
+
+--------------------------Получение игрока
+local Players = game:GetService("Players") получение инпрка
+
+local function onPlayerAdded(player)
+
+end
+
+Players.PlayerAdded:Connect(onPlayerAdded)
+---------------------- ТАБЛИЦА
+
+local Players = game:GetService("Players")
+
+local function onPlayerAdded(player)
+	local leaderstats = Instance.new("Folder")
+   leaderstats.Name = "leaderstats"
+   leaderstats.Parent = player
+end
+
+Players.PlayerAdded:Connect(onPlayerAdded)
+
+
+task.wait()улучшенная версия wait()
+
+Part.BrickColor = BrickColor.new("Medium red") Смена цвета
+
+if Part.BrickColor == BrickColor.new("Medium red") then else if 
+	print("ITs Mediom rape part")
+elseif Part.BrickColor == BrickColor.new("Grey") then
+	print("its grey")
+end
+
+---------------БЛОК УБИЙЦА
+local KillBrick = script.Parent убийца блок проверка на касание
+KillBrick.Touched:Connect(function(touchPart)
+	local humanoid = touchPart.Parent:FindFirstChild("Humanoid")
+	if humanoid then
+		humanoid.Health = 0
+	end
+end)
+
+---------------------ФОР Я ИН РАНДЖЕ
+for number = 1 , 100 do    --for i in range
+	print(1)
+	task.wait(0.5)
+end
+
+------------- СОЗДАНИЕ ОБЬЕКТА
+local Part1 = Instance.new("Part") создание обьекта
+Part1.Parent = game.Workspace
+Part1.Name = "sdsasd"
+
+
+part.CFrame = CFrame.new(position) -- перемещение
+
+for number , value in pairs(game.Workspace.Folder:GetChildren()) do
+	value.Name= number
+	
+	if game.Workspace:FindFirstChild("EndPart") then
+		break
+	end
+end
+
+-------------repeat until хз 
+local part = "ssa"
+local Melon = game.Workspace:FindFirstChild("part")
+local hotdog = 1
+repeat
+	hotdog += 1
+	print(hotdog)
+until hotdog == 10
+
+
+local Part1= game.Workspace.ssa
+
+Part1.Touched:Connect(function()
+	print("Touched")
+end)
+
+local function hi()
+	print("hi")
+end
+Part1.Touched:Connect(hi)
+
+
+local Part1= game.Workspace.ssa
+
+Part1.Touched:Connect(function(hit)
+	print("Touched")
+	print(hit)
+	if hit.Parent:FindFirstChild("Humanoid") then
+		local health = hit.Parent.Humanoid.Health
+		hit.Parent.Humanoid.Health = health - 1
+	end
+end)
+
+Instance.new("Part" , game.Workspace)
+
+
+game.Players.PlayerAdded:Connect(function(player)
+	local leaderstats = Instance.new("Folder", player)
+	leaderstats.Name = "leaderstats"
+	local Points = Instance.new("IntValue", leaderstats)
+	Points.Name = "Cash"
+	Points.Value = 100
+end)
+
+local MyFavoriteFood = {"pizza" , "Food" , "candle"}
+for key , foods in pairs(MyFavoriteFood) do
+	print(key ,"=", foods)
+end
+
+local Tool = script.Parent -- инструмент
+
+Tool.Activated:Connect(function()
+	print("work")
+	local Destroy1 = game.Workspace.Destroyer
+	Destroy1:Destroy()
+end)
+
+Tool.Deactivated:Connect(function()
+	print("now i am dont work")
+end)
+
+Tool.Equipped:Connect(function()
+	print("you use me")
+end)
+Tool.Unequipped:Connect(function()
+	print("now i dont equip")
+end)
+
+
+
+local player = game.Players.LocalPlayer -- локальный игрок
+
+local player = game.Players.LocalPlayer
+local mouse = player:GetMouse()
+mouse.Button1Down:Connect(function()
+	print("playr Press button down")
+end)
+mouse.Move:Connect(function()
+	print(mouse.x,mouse.y)
+end)
+
+local player = game.Players.LocalPlayer -- мышка
+local mouse = player:GetMouse()
+mouse.Button1Down:Connect(function()
+	print("playr Press button down")
+end)
+mouse.Move:Connect(function()
+	print(mouse.Target)
+end)
+
+
+UserInputService = game:GetService("UserInputService") -- проверка на зажатие кнопки
+local keyPress = false
+UserInputService.InputBegan:Connect(function(input , event)
+	if input.KeyCode == Enum.KeyCode.R then
+		keyPress = true
+	end
+	while keyPress == true do
+		wait()
+		print("work")
+	end
+end)
+UserInputService.InputEnded:Connect(function( input , event)
+	if input.KeyCode == Enum.KeyCode.R then
+		keyPress = false
+	end
+end)
+
+
+UserInputService = game:GetService("UserInputService")
+local keyPress = false
+UserInputService.InputBegan:Connect(function(input , event)
+	if input.UserInputType == Enum.UserInputType.Keyboard then
+		print("player press" , input , event , input.KeyCode)
+		
+	end
+end)
+
+------------------------------------------ remote events
+--локальный скрипт отправляет
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local DeletePart = ReplicatedStorage:WaitForChild("DeletePart")
+local Greenpart = game.Workspace.GreenPART
+local UIS = game:GetService("UserInputService")
+UIS.InputBegan:Connect(function(input)
+	if input.KeyCode == Enum.KeyCode.Delete then
+		print("delete press")
+		DeletePart:FireServer(Greenpart)
+	end
+end)
+---другой скрипт который принимает
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local DeletePart = ReplicatedStorage:WaitForChild("DeletePart")
+
+DeletePart.OnServerEvent:Connect(function(player, part)
+	part:Destroy()
+end)
+
+---------------------------------------------------------------- tweenService
+local Tweenservice = game:GetService("TweenService")
+local part = script.Parent
+
+local Info = TweenInfo.new(
+	5 , -- Длина
+	Enum.EasingStyle.Sine , -- стиль как расшираеться
+	Enum.EasingDirection.Out, -- какие части расширяться первыми
+	0 , --- Количество повторений
+	false , --- reverse если тру то он вырастет как нужно но потом вернеться в изначальное положение
+	0 --- Задержка
+)
+local Goals ={
+	Size = Vector3.new(15, 15, 15),
+	
+}
+local MakePartBiggerTween = Tweenservice:Create(part , Info , Goals)
+
+MakePartBiggerTween:Play()
+
+-- goals ,info  это посути инфа которую надо заполнить чтобы блок знал как ему расширяться
+
+
+
+------------ СЛОВАРЬ
+local FistDictionary = { 
+	Bread = "Its tastes comes",
+	Cheese = "Its coming out"
+}
+
+print(FistDictionary.Cheese)
+
+
+
+----------- репликейтед сторадж
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local part = Instance.new("Part", ReplicatedStorage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
