@@ -259,12 +259,16 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local part = Instance.new("Part", ReplicatedStorage
 
+-- vector3 вектор 3
 
+part2.Position = Vector3.new(-26.05, 1.8, -38) -- позиция в мире в 3 д пространстве
+part2.Rotation = Vector3.new(0, 0, 0)  -- поворот
+-- Вектор не работает на модели на модели нужно использовать CFrame
 
-
-
-
-
+local part2= game.Workspace.Part2 -- что перемешаем
+local part1= game.Workspace.Part1-- Место куда переместим
+wait(3)
+part2.CFrame = workspace.Part1.CFrame
 
 
 
