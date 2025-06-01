@@ -274,6 +274,54 @@ part2.CFrame = workspace.Part1.CFrame
 local debounce = false -- Защита от повторного срабатывания
 
 
+-- Lerp CFrame
+local Part = game.Workspace.Part
+local Part2 = game.Workspace.Part2
+
+Part.CFrame = Part.CFrame:Lerp(Part2.CFrame, 0.5)
+
+local function loopT() -- функция просто
+	local  i = 0 
+	while i <= 1000 do
+		print(i)
+		i+=1
+		
+		if i == 20 then
+			print("lol")
+			break
+		end
+	end
+end
+
+loopT()
+
+----------------------------------- запись 1
+local function onPlayerAdded(player)
+	print(player)
+end
+
+game.Players.PlayerAdded:Connect(onPlayerAdded)
+
+----------------- разные записи запись 2
+game.Players.PlayerAdded:Connect(function()
+	print("a new player has joined ")
+end)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
