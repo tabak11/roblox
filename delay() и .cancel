@@ -9,3 +9,19 @@ if Rand == 1 then
 	task.cancel(delayTask)
 	print("ddadssd")
 end
+
+
+local islop = true
+task.spawn(function() -- различие от обычного while  в том что он увидет
+	while islop do-- все что идет ниже но будет выполняться
+		print(2)
+		task.wait()
+	end
+end)
+
+for i = 1 , 10 do
+	print("5") -- это паралельно выполниться с while 
+	task.wait()
+end
+islop = false -- он увидет это и закончиться
+print(4)
