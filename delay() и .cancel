@@ -1,0 +1,11 @@
+print("task 1")
+local delayTask = task.delay(5 , function()
+	print("2")
+end)
+print("task3")
+
+local Rand = 1
+if Rand == 1 then
+	task.cancel(delayTask)
+	print("ddadssd")
+end
