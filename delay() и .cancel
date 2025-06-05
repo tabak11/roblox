@@ -1,16 +1,18 @@
+
+---------------------------delay() и .cancel
 print("task 1")
-local delayTask = task.delay(5 , function()
-	print("2")
-end)
-print("task3")
+local delayTask = task.delay(5 , function() -- пропускает весь код внутри и сделает с задержкой в 5 секунд
+	print("выфв2")
+end) 
+print("task3")------ с начала выводит task1 потом task3 , а через 5 секунд выфв2 , но снизу есть .cancel , который это отменит
 
 local Rand = 1
 if Rand == 1 then
-	task.cancel(delayTask)
+	task.cancel(delayTask) -- отменяет скрипт выше 
 	print("ddadssd")
 end
 
-
+-------------------------------- spawn()
 local islop = true
 task.spawn(function() -- различие от обычного while  в том что он увидет
 	while islop do-- все что идет ниже но будет выполняться
@@ -25,3 +27,23 @@ for i = 1 , 10 do
 end
 islop = false -- он увидет это и закончиться
 print(4)
+
+------------------------------------- defer()
+print(1)
+
+task.defer(function() -------- все в скрипте выполниться и только тогда task.defer начнет работать то есть все что написано в нем выполниться последним
+	print("defer")
+end)
+for i = 1 , 1000 do
+	print("42")
+end
+print(4)
+
+
+
+
+
+
+
+
+
