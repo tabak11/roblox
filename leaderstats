@@ -1,0 +1,55 @@
+local remAnot = game.ReplicatedStorage:WaitForChild("RemAnot")
+local givecur = game.ReplicatedStorage.GiveC
+
+-- Player setup
+game.Players.PlayerAdded:Connect(function(player)
+    local leaderstats = Instance.new("Folder", player)
+    leaderstats.Name = "leaderstats"
+    
+    local coins = Instance.new("IntValue", leaderstats)
+    coins.Name = "Coins"
+    coins.Value = 50
+end)
+
+-- Remote event handler
+givecur.OnServerEvent:Connect(function(player, coinam, spi2sok)
+    local leaderstats = player.leaderstats
+    if leaderstats then
+        local coins = leaderstats.Coins
+        coins.Value += coinam
+    end
+end)
+
+-- Periodic coin checker
+while true do
+    for _, player in ipairs(game.Players:GetPlayers()) do
+        if player:FindFirstChild("leaderstats") then--- способ получить лидерстаты
+            local coins = player.leaderstats:FindFirstChild("Coins") --- а из них найти Coins
+            if coins and coins.Value == 100 then
+                print(player.Name .. " has 100 coins!")
+                -- Optional: Reset coins if needed
+                -- coins.Value = 0
+            end
+        end
+    end
+    task.wait(1)  -- Check every 1 second (adjust as needed)
+end -- все тут написала нейронка
+
+
+
+
+
+
+
+
+
+
+
+game.Players.PlayerAdded:Connect(function(player) -- Папка со статистикой
+	local leaderstats = Instance.new("Folder", player)
+	leaderstats.Name = "leaderstats"
+	local Points = Instance.new("IntValue", leaderstats)
+	Points.Name = "Cash"
+	Points.Value = 100
+end)
+
