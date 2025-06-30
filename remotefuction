@@ -1,0 +1,168 @@
+----------------------------------- начало локального скрипта
+local remOtFun = game.ReplicatedStorage.RemoteFunctionBuy
+local Gui = script.Parent
+local promt = Gui.lol
+local but1 = Gui.TextButton
+local counter = Gui.counter
+local apgr = 1
+local Earner = Gui.Earner
+local EarnerFunc = game.ReplicatedStorage.EarnerFunc
+
+local invButton = Gui.inVEN
+local OpenINV = game.ReplicatedStorage.OpenInv
+local flag = true
+local giveTool = game.ReplicatedStorage.GiveTool
+local ToolgiveButton = Gui.KnifeINV
+
+ToolgiveButton.MouseButton1Click:Connect(function()
+	giveTool:InvokeServer()
+end)
+
+invButton.MouseButton1Click:Connect(function()
+	
+	local Func = OpenINV:InvokeServer(flag)
+	flag = not flag
+end)
+
+
+
+local function Nastoyka()
+	but1.BackgroundColor = BrickColor.new("White")
+	but1.Text = "Купить ещё"
+end
+	
+Earner.MouseButton1Click:Connect(function()
+	local Zaproc = EarnerFunc:InvokeServer(10, apgr)
+	if Zaproc then
+		Earner.Text = "Заработано"
+	end
+end)
+
+but1.MouseButton1Click:Connect(function()
+	local push = remOtFun:InvokeServer(apgr)
+	if push  then
+		but1.Text = "УРА"
+		but1.BackgroundColor = BrickColor.new("Lime green")
+		apgr += 1
+		task.wait(1)
+		Nastoyka()
+	else
+		but1.Text = "NOOO"
+		but1.BackgroundColor = BrickColor.new("Red flip/flop")
+		task.wait(1)
+		Nastoyka()
+	end
+end)
+task.spawn(function()
+	
+	while true  do
+		task.wait()
+		local player = game.Players.LocalPlayer
+		local leaderstats = player.leaderstats
+		local coins = leaderstats.Coins
+		promt.Text = "Coins: "..coins.Value
+	end
+end)
+task.spawn(function()
+	while true do
+		counter.Text = apgr
+		task.wait()
+	end
+end)
+--------------------------------------------------------------------- КОНЕЦ ЛОКАЛЬНОГО СКРИПТА
+
+
+
+
+--------------------------------------------------------------------Скрипт в сервер скрипт сервер
+game.Players.PlayerAdded:Connect(function(player)
+	
+	local leaderstats = Instance.new("Folder" , player)
+	leaderstats.Name = "leaderstats"
+	
+	local coins = Instance.new("IntValue" , leaderstats)
+	coins.Name = "Coins"
+	coins.Value = 10
+end)
+function ColorBlack (button)
+	button.Text = "Купить меч"
+	button.BackgroundColor = BrickColor.new("Yellow flip/flop flip/flop")
+end
+local events = game.ReplicatedStorage.RemoteFunctionBuy
+events.OnServerInvoke = function(player , agr)
+	local agrb = agr
+	local flag = false
+	local leaderstats = player.leaderstats
+	local coins = leaderstats.Coins
+	if coins.Value >= 10 + agrb then
+		coins.Value -= 10
+		flag = true
+	end
+	
+	return flag
+end
+local Zaproc = game.ReplicatedStorage.EarnerFunc
+Zaproc.OnServerInvoke = function(player , money, ARG)
+	task.wait()
+	local leaderstats = player.leaderstats
+	local coins = leaderstats.Coins
+	local Earn = money 
+	coins.Value +=  Earn *ARG
+end
+local InvOpen =game.ReplicatedStorage.OpenInv
+InvOpen.OnServerInvoke = function(player , flag)
+	task.wait()
+	local Invback = player.PlayerGui.ScreenGui.InvBackground
+	local invknife = player.PlayerGui.ScreenGui.KnifeINV
+	local buyer = player.PlayerGui.ScreenGui.INV
+	if flag == true then
+		Invback.Visible = true
+		invknife.Visible = true
+		buyer.Visible = true
+	else	
+		Invback.Visible = false
+		invknife.Visible = false
+		buyer.Visible = false
+	end
+end
+local GiveTool = game.ReplicatedStorage.GiveTool
+GiveTool.OnServerInvoke = function(player)
+	
+	local tool = game.ReplicatedStorage.ClassicSword
+	local leaderstats = player.leaderstats
+	local coins = leaderstats.Coins
+	local Gui = player.PlayerGui.ScreenGui
+	local button = Gui.KnifeINV
+	if coins.Value >= 100 then
+		coins.Value -= 100
+		clonetool = tool:Clone()
+		clonetool.Parent = player.Backpack
+		button.Text = "Успешно - 100"
+		button.BackgroundColor = BrickColor.new("Slime green")
+		wait(2)
+		ColorBlack(button)
+	else
+		button.Text = "Не успешно"
+		button.BackgroundColor = BrickColor.new("Red flip/flop")
+		wait(2)
+		ColorBlack(button)
+	end
+	
+end
+
+-------------------------- конец скрипта
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
