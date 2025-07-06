@@ -1,0 +1,8 @@
+local task2 = coroutine.create(function()
+	wait(3)
+	print("dstsa")
+end)
+coroutine.resume(task2) -- вызывает функцию , которая выполняется паралельно со скриптои
+wait(3)
+print(1)
+--------- dstsa и 1 выведуться одновременно
