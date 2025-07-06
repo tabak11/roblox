@@ -11,3 +11,38 @@ local task2  = coroutine.wrap(function()
 	print(1)
 end)
 task2() --- то же самое , но коротин сделана функцией и её можно вызвать
+
+coroutine.wrap(function()
+	print(1)
+end)() ---- тоже самое , но без функции или переменной
+
+
+local function Myfunction() --- другая запись
+	print("dsad")
+end
+coroutine.wrap(Myfunction)()
+
+local task2 = coroutine.create(function( num1, num2) --- с переменными
+	print(num1 + num2)
+end)
+coroutine.resume(task2 , 2 , 3)
+
+
+---------------------------- две одновременно
+local Loop1 = coroutine.create(function()
+	while true  do
+		print(1)
+		wait(1)
+	end
+end)
+local loop2 = coroutine.create(function()
+	while true  do
+		print(2)
+		wait(1)
+	end
+end)
+coroutine.resume(Loop1)
+coroutine.resume(loop2)
+
+print(coroutine.status((Loop1)))
+print(coroutine.status((loop2)))
