@@ -46,3 +46,34 @@ coroutine.resume(loop2)
 
 print(coroutine.status((Loop1)))
 print(coroutine.status((loop2)))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+local task1 = coroutine.create(function(a ,b)
+	print(a + b)
+end)
+
+coroutine.resume(task1, 10 , 11)
+local task2 = coroutine.wrap(function()
+	print(2)
+end)
+task2()
+
+local myfunction = function()
+	print(1)
+end
+coroutine.wrap(myfunction)()
