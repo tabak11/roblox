@@ -77,3 +77,16 @@ local myfunction = function()
 	print(1)
 end
 coroutine.wrap(myfunction)()
+
+
+
+local loop = coroutine.create(function()
+	for i = 1 , 10  do
+		print(i)
+		wait(1)
+		coroutine.yield()
+	end
+end)
+coroutine.resume(loop)
+print(1111)
+coroutine.resume(loop)
